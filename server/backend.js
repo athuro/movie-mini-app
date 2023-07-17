@@ -44,6 +44,14 @@ app.patch('/movies/:title', (req, res) => {
         .then(() => res.status(201).send(update))
 })
 
+app.get('/movies/:id', (req, res) => {
+    const id = req.params
+    knex('movies')
+        .select('*')
+        .where(id, 'id')
+        .then((data) => res.status(200).send(data))
+})
+
 app.listen(port, () => {
     console.log(`API Server is running on http.//localhost:${port}`);
   });
