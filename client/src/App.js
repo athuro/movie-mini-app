@@ -2,6 +2,7 @@ import './App.css';
 import { Route, Routes, Link } from 'react-router-dom';
 import Watched from './Watched';
 import Unwatched from './Unwatched';
+import Details from './Details';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Unwatched/>} />
           <Route path='/watched' element={<Watched/>} />
+          <Route path='/movies/:id' element={<Details/>} />
         </Routes>
       </div>
     

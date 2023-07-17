@@ -7,7 +7,7 @@ const Unwatched = () => {
   const [dummy, setDummy] = useState(true)
 
   useEffect(() => {
-    fetch('http://localhost:8081/movies')
+    fetch('http://localhost:8082/movies')
       .then(res => res.json())
       .then(data => setMovies(data))
   }, [dummy])
@@ -21,7 +21,7 @@ const Unwatched = () => {
           if(newMovie) {
             let resBody = [{
               "title": newMovie,
-              "list": "toWatch"
+              "list": "unwatched"
             }]
 
             const init = {
@@ -30,7 +30,7 @@ const Unwatched = () => {
               body: JSON.stringify(resBody)
             };
 
-            fetch('http://localhost:8081/movies', init)
+            fetch('http://localhost:8082/movies', init)
               // .then(response => response.json())
               .then(data => console.log(data))
               .catch((error) => console.error('Error:', error))
@@ -47,7 +47,7 @@ const Unwatched = () => {
               <button onClick={ () => {
                 const init ={ method: 'DELETE'};
       
-                fetch(`http://localhost:8081/movies/${e.title}`, init)
+                fetch(`http://localhost:8082/movies/${e.title}`, init)
                   // .then(response => response.json())
                   .then(data => console.log(data))
                   .catch((error) => console.error('Error:', error))
@@ -69,7 +69,7 @@ const Unwatched = () => {
                       body: JSON.stringify(resBody)
                     };
         
-                    fetch(`http://localhost:8081/movies/${e.title}`, init)
+                    fetch(`http://localhost:8082/movies/${e.title}`, init)
                       // .then(response => response.json())
                       .then(data => console.log(data))
                       .catch((error) => console.error('Error:', error))

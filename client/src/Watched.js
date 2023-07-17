@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Watched = () => {
 
@@ -7,7 +8,7 @@ const Watched = () => {
   const [dummy, setDummy] = useState(true)
 
   useEffect(() => {
-    fetch('http://localhost:8081/movies')
+    fetch('http://localhost:8082/movies')
       .then(res => res.json())
       .then(data => setMovies(data))
   }, [dummy])
@@ -22,7 +23,7 @@ const Watched = () => {
           if(newMovie) {
             let resBody = [{
               "title": newMovie,
-              "list": "toWatch"
+              "list": "watched"
             }]
 
             const init = {
@@ -31,7 +32,7 @@ const Watched = () => {
               body: JSON.stringify(resBody)
             };
 
-            fetch('http://localhost:8081/movies', init)
+            fetch('http://localhost:8082/movies', init)
               // .then(response => response.json())
               .then(data => console.log(data))
               .catch((error) => console.error('Error:', error))
@@ -44,11 +45,11 @@ const Watched = () => {
         if(e.list == 'watched') 
           return (
             <div key={`${e.title}`}>
-              <p id={`${e.title}_title`}>{e.title}</p>
+              <Link to={`/movies/${e.id}`} id={`${e.title}_title`}>{e.title}</Link>
               <button onClick={ () => {
                 const init ={ method: 'DELETE'};
       
-                fetch(`http://localhost:8081/movies/${e.title}`, init)
+                fetch(`http://localhost:8082/movies/${e.title}`, init)
                   // .then(response => response.json())
                   .then(data => console.log(data))
                   .catch((error) => console.error('Error:', error))
@@ -70,7 +71,7 @@ const Watched = () => {
                       body: JSON.stringify(resBody)
                     };
         
-                    fetch(`http://localhost:8081/movies/${e.title}`, init)
+                    fetch(`http://localhost:8082/movies/${e.title}`, init)
                       // .then(response => response.json())
                       .then(data => console.log(data))
                       .catch((error) => console.error('Error:', error))
